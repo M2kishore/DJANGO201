@@ -18,9 +18,11 @@ from django.urls import path
 
 from django.http import HttpResponse
 
+from django.shortcuts import render
+
 
 def task_view(request):
-    return HttpResponse("<h1>Tractor</h1>", status=200)
+    return render(request, "tasks.html", {"tasks": ["plastic", "Idhu task da"]})
 
 
 urlpatterns = [path("admin/", admin.site.urls), path("tasks", task_view)]
