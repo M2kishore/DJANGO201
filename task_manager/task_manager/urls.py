@@ -33,8 +33,14 @@ def add_task_view(request):
     return HttpResponseRedirect("tasks")
 
 
+def delete_task_view(request, index):
+    del tasks[index - 1]
+    return HttpResponseRedirect("/tasks")
+
+
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("tasks", task_view),
     path("add-task", add_task_view),
+    path("delete-task/<int:index>", delete_task_view),
 ]
