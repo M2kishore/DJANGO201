@@ -13,6 +13,7 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from re import search
 from django.contrib import admin
 from django.urls import path
 
@@ -20,27 +21,31 @@ from django.http import HttpResponse, HttpResponseRedirect
 
 from django.shortcuts import render
 
-tasks = []
+from tasks.models import Task
 
 
 def task_view(request):
+    search_term = request.GET.get("search")
+    tasks = Task.objects.all()
+    if search_term:
+        tasks = tasks.filter(title__icontains=search_term)
     return render(request, "tasks.html", {"tasks": tasks})
 
 
 def add_task_view(request):
     task_string = request.GET.get("task")
-    tasks.append(task_string)
-    return HttpResponseRedirect("tasks")
+    Task(title=task_string).save()
+    return HttpResponseRedirect("/tasks")
 
 
-def delete_task_view(request, index):
-    del tasks[index - 1]
+def delete_task_view(request, id):
+    Task.objects.filter(id).delete()
     return HttpResponseRedirect("/tasks")
 
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("tasks", task_view),
-    path("add-task", add_task_view),
-    path("delete-task/<int:index>", delete_task_view),
+    path("tasks/", task_view),
+    path("add-task/", add_task_view),
+    path("delete-task/<int:id>/", delete_task_view),
 ]
