@@ -6,7 +6,7 @@ from tasks.models import Task
 
 
 def task_view(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.filter(deleted=False)
     search_string = request.GET.get("search")
     if search_string:
         tasks = tasks.filter(title__icontains=search_string)
@@ -20,5 +20,5 @@ def add_task_view(request):
 
 
 def delete_task_view(request, id):
-    Task.objects.filter(id=id).delete()
+    Task.objects.filter(id=id).update(deleted=True)
     return HttpResponseRedirect("/tasks/")
