@@ -11,6 +11,7 @@ class GenericTaskView(ListView):
     queryset = Task.objects.filter(deleted=False)
     template_name = "tasks.html"
     context_object_name = "tasks"
+    paginate_by = 5
 
     def get_queryset(self):
         tasks = Task.objects.filter(deleted=False)
