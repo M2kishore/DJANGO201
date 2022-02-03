@@ -8,9 +8,16 @@ from django.views.generic.list import ListView
 
 
 class GenericTaskView(ListView):
-    model = Task
+    queryset = Task.objects.filter(deleted=False)
     template_name = "tasks.html"
     context_object_name = "tasks"
+
+    def get_queryset(self):
+        tasks = Task.objects.filter(deleted=False)
+        search_string = self.request.GET.get("search")
+        if search_string:
+            tasks = tasks.filter(title__icontains=search_string)
+        return tasks
 
 
 class TaskView(View):
