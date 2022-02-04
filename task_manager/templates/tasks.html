@@ -15,3 +15,9 @@
 {{forloop.counter}}
 {{task}} <a href="/delete-task/{{task.id}}">remove</a><br />
 {% endfor %}
+<br>
+{% for page in paginator.page_range %}
+<li>
+    <a href="?page={{page}}&search={{request.GET.search}}">{{page}}</a>
+</li>
+{% endfor %}
