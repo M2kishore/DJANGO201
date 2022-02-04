@@ -21,11 +21,13 @@ from tasks.views import (
     task_view,
     TaskView,
     GenericTaskView,
+    CreateTaskView,
 )
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("tasks/", GenericTaskView.as_view()),
+    path("create-task/", CreateTaskView.as_view()),
     path("add-task/", add_task_view),
     path("delete-task/<int:id>/", delete_task_view),
 ]

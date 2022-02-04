@@ -21,6 +21,17 @@ class GenericTaskView(ListView):
         return tasks
 
 
+class CreateTaskView(View):
+    def get(self, request):
+        return render(request, "task_create.html")
+
+    def post(self, request):
+        task_string = request.POST.get("task")
+        task_obj = Task(title=task_string)
+        task_obj.save()
+        return HttpResponseRedirect("/tasks")
+
+
 class TaskView(View):
     def get(self, request):
         tasks = Task.objects.filter(deleted=False)
