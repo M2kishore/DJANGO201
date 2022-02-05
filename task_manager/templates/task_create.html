@@ -1,5 +1,5 @@
 <form action="/create-task/" method="post">
-    <input type="text" name="task" />
+    {{form.as_p}}
     {% csrf_token %}
     <button type="submit">Add Task</button>
 </form>

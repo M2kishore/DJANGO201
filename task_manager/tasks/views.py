@@ -1,10 +1,42 @@
+from dataclasses import field
+from django.core.exceptions import ValidationError
 from django.shortcuts import render
 
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
 from tasks.models import Task
 from django.views import View
+from django.views.generic import CreateView, UpdateView
 from django.views.generic.list import ListView
+
+
+from django.forms import ModelForm
+
+
+class TaskCreateForm(ModelForm):
+    def clean_title(self):
+        title = self.cleaned_data["title"]
+        print(title)
+        if len(title) < 10:
+            raise ValidationError("The data is too small")
+        return title
+
+    class Meta:
+        model = Task
+        fields = ("title", "description", "completed")
+
+
+class GenericTaskUpdateView(UpdateView):
+    model = Task
+    form_class = TaskCreateForm
+    template_name = "task_update.html"
+    success_url = "/tasks"
+
+
+class GenerivTaskCreateView(CreateView):
+    form_class = TaskCreateForm
+    template_name = "task_create.html"
+    success_url = "/tasks"
 
 
 class GenericTaskView(ListView):

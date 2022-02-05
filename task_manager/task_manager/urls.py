@@ -22,12 +22,15 @@ from tasks.views import (
     TaskView,
     GenericTaskView,
     CreateTaskView,
+    GenerivTaskCreateView,
+    GenericTaskUpdateView,
 )
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("tasks/", GenericTaskView.as_view()),
-    path("create-task/", CreateTaskView.as_view()),
+    path("create-task/", GenerivTaskCreateView.as_view()),
+    path("update-task/<pk>", GenericTaskUpdateView.as_view()),
     path("add-task/", add_task_view),
     path("delete-task/<int:id>/", delete_task_view),
 ]
