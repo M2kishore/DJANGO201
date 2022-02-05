@@ -16,14 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from tasks.views import (
+    CreateTaskView,
+    GenericTaskDetailView,
+    GenericTaskUpdateView,
+    GenericTaskView,
+    GenerivTaskCreateView,
+    GenericTaskDeleteView,
+    TaskView,
     add_task_view,
     delete_task_view,
     task_view,
-    TaskView,
-    GenericTaskView,
-    CreateTaskView,
-    GenerivTaskCreateView,
-    GenericTaskUpdateView,
 )
 
 urlpatterns = [
@@ -31,6 +33,8 @@ urlpatterns = [
     path("tasks/", GenericTaskView.as_view()),
     path("create-task/", GenerivTaskCreateView.as_view()),
     path("update-task/<pk>", GenericTaskUpdateView.as_view()),
+    path("detail-task/<pk>", GenericTaskDetailView.as_view()),
+    path("delete-task/<pk>", GenericTaskDeleteView.as_view()),
     path("add-task/", add_task_view),
-    path("delete-task/<int:id>/", delete_task_view),
+    # path("delete-task/<int:id>/", delete_task_view),
 ]

@@ -1,16 +1,29 @@
 from dataclasses import field
+from re import template
+
 from django.core.exceptions import ValidationError
-from django.shortcuts import render
+from django.forms import ModelForm
 
 # Create your views here.
 from django.http import HttpResponse, HttpResponseRedirect
-from tasks.models import Task
+from django.shortcuts import render
 from django.views import View
-from django.views.generic import CreateView, UpdateView
+from django.views.generic.edit import CreateView, UpdateView, DeleteView
+from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
+from tasks.models import Task
 
-from django.forms import ModelForm
+
+class GenericTaskDeleteView(DeleteView):
+    model = Task
+    template_name = "task_delete.html"
+    success_url = "/tasks/"
+
+
+class GenericTaskDetailView(DetailView):
+    model = Task
+    template_name = "task_detail.html"
 
 
 class TaskCreateForm(ModelForm):

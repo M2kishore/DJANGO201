@@ -13,7 +13,7 @@
 <h1>Tasks</h1>
 {% for task in tasks%}
 {{forloop.counter}}
-{{task}} <a href="/delete-task/{{task.id}}">remove</a>  <a href="/update-task/{{task.id}}">update</a><br />
+{{task}} <a href="/delete-task/{{task.id}}">remove</a>  <a href="/update-task/{{task.id}}">update</a> <a href="/detail-task/{{task.id}}">details</a><br />
 {% endfor %}
 <br>
 {% for page in paginator.page_range %}
