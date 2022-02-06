@@ -20,7 +20,7 @@ from tasks.views import (
     GenericTaskDetailView,
     GenericTaskUpdateView,
     GenericTaskView,
-    GenerivTaskCreateView,
+    GenericTaskCreateView,
     GenericTaskDeleteView,
     session_storage_view,
     UserCreateView,
@@ -36,7 +36,7 @@ from django.contrib.auth.views import LogoutView
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("tasks/", GenericTaskView.as_view()),
-    path("create-task/", GenerivTaskCreateView.as_view()),
+    path("create-task/", GenericTaskCreateView.as_view()),
     path("update-task/<pk>", GenericTaskUpdateView.as_view()),
     path("detail-task/<pk>", GenericTaskDetailView.as_view()),
     path("delete-task/<pk>", GenericTaskDeleteView.as_view()),
