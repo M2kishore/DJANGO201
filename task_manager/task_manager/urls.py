@@ -31,11 +31,14 @@ from tasks.views import (
     task_view,
 )
 
+from tasks.apiViews import TaskListAPI
+
 from django.contrib.auth.views import LogoutView
 
 urlpatterns = [
     path("admin/", admin.site.urls),
     path("tasks/", GenericTaskView.as_view()),
+    path("tasksapi/", TaskListAPI.as_view()),
     path("create-task/", GenericTaskCreateView.as_view()),
     path("update-task/<pk>", GenericTaskUpdateView.as_view()),
     path("detail-task/<pk>", GenericTaskDetailView.as_view()),
