@@ -26,6 +26,7 @@ from tasks.views import (
     UserCreateView,
     UserLoginView,
     TaskView,
+    TestView,
     add_task_view,
     delete_task_view,
     task_view,
@@ -55,5 +56,6 @@ urlpatterns = [
     path("user/logout/", LogoutView.as_view()),
     path("sessiontest", session_storage_view),
     path("add-task/", add_task_view),
+    path("test/", TestView.as_view()),
     # path("delete-task/<int:id>/", delete_task_view),
 ] + router.urls

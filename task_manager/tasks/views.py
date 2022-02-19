@@ -128,6 +128,11 @@ class TaskView(View):
         pass
 
 
+class TestView(View):
+    def get(self, request):
+        return render(request, "test.html")
+
+
 def task_view(request):
     tasks = Task.objects.filter(deleted=False)
     search_string = request.GET.get("search")
