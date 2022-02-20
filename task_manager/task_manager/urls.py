@@ -27,6 +27,7 @@ from tasks.views import (
     UserLoginView,
     TaskView,
     TestView,
+    TestStaticView,
     add_task_view,
     delete_task_view,
     task_view,
@@ -57,5 +58,6 @@ urlpatterns = [
     path("sessiontest", session_storage_view),
     path("add-task/", add_task_view),
     path("test/", TestView.as_view()),
+    path("test-static/", TestStaticView.as_view()),
     # path("delete-task/<int:id>/", delete_task_view),
 ] + router.urls
