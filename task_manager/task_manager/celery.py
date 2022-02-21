@@ -15,4 +15,4 @@ app.autodiscover_tasks(lambda: settings.INSTALLED_APPS)
 # Periodic Task
 @periodic_task(run_every=timedelta(seconds=5))
 def every_5_seconds():
-    print("Running Every 30 Seconds!")
+    print("Running Every 5 Seconds!")
